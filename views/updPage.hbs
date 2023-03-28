@@ -1,0 +1,10 @@
+
+<br/>
+<form action="update" method="post">
+    <input type="text" placeholder="Фамилия, Имя, Отчество" name="name" value="{{contactsName}}">
+    <input type="text" id="phone" placeholder="Телефон" name="newPhone" value="{{contactsPhone}}"> 
+    <input type="text" style="display: none;" value="{{contactsPhone}}" name="phone">
+    <input type="submit" value="Изменить">
+</form>
+    <button onclick="delete1()">Удалить</button>
+<button onclick="backUpd()">Отказаться</button>
