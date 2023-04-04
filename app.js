@@ -17,6 +17,10 @@ app.set("view engine", "hbs");
 hbs.registerPartials(__dirname + "/views/partials");
 const urlencodedParser = express.urlencoded({extended: false});
 
+hbs.registerHelper("backButton", function(){
+    return new hbs.SafeString('<button onclick="window.location.href= window.location.href.slice(0,window.location.href.indexOf(`/add`));">Отказаться</button>');
+});
+
 app.get('/', function(request,response){
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
     response.render('mainPage.hbs',{
@@ -49,7 +53,8 @@ app.post('/add', urlencodedParser, function(request,response){
 
 app.get('/update', function(request,response){
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
-    let phone = '+' + request.query.phone.split(' ')[1];
+    let phone = request.query.phone;
+    console.log(phone)
     for(let i = 0; i < data.length; i++){
         if(data[i].phone ==  phone){
             response.render('updPage.hbs',{
@@ -79,7 +84,7 @@ app.post('/update', urlencodedParser, function(request,response){
 
 app.post('/delete', urlencodedParser, function(request,response){
     console.log(request.query);
-    let phone = '+' + request.query.phone.split(' ')[1];
+    let phone = request.query.phone;
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
     console.log(data);
     for(let i = 0; i < data.length; i++){
