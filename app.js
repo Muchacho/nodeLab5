@@ -16,7 +16,7 @@ app.engine("hbs", expressHbs.engine(
 app.set("view engine", "hbs");
 hbs.registerPartials(__dirname + "/views/partials");
 const urlencodedParser = express.urlencoded({extended: false});
-
+app.use(urlencodedParser);
 hbs.registerHelper("backButton", function(){
     return new hbs.SafeString('<button onclick="window.location.href= window.location.href.slice(0,window.location.href.indexOf(`/add`));">Отказаться</button>');
 });
@@ -38,7 +38,7 @@ app.get('/add', function(request,response){
     });
 });
 
-app.post('/add', urlencodedParser, function(request,response){
+app.post('/add', function(request,response){
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
     for(let i = 0; i < data.length; i++){
         if(data[i].phone == request.body.phone){
@@ -69,7 +69,7 @@ app.get('/update', function(request,response){
     }
 });
 
-app.post('/update', urlencodedParser, function(request,response){
+app.post('/update', function(request,response){
     console.log(request.body);
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
     for(let i = 0; i < data.length; i++){
@@ -82,7 +82,7 @@ app.post('/update', urlencodedParser, function(request,response){
     response.redirect('/');
 });
 
-app.post('/delete', urlencodedParser, function(request,response){
+app.post('/delete', function(request,response){
     console.log(request.query);
     let phone = request.query.phone;
     let data = JSON.parse(fs.readFileSync('data.json', 'utf-8'));
