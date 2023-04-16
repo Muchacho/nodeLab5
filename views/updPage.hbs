@@ -1,8 +1,8 @@
 
 <br/>
-<form action="update" method="post" onclick="getNameInp()">
-    <input type="text" placeholder="Фамилия, Имя, Отчество" name="name" value="{{contactsName}}" id="nameInp" onchange="disBtn()">
-    <input type="text" id="phone" placeholder="Телефон" name="newPhone" value="{{contactsPhone}}"> 
+<form action="update" method="post" onclick="getNameInp()" onchange="disBtn()">
+    <input type="text" placeholder="Фамилия, Имя, Отчество" name="name" value="{{contactsName}}" id="nameInp" >
+    <input type="text" placeholder="Телефон" name="newPhone" value="{{contactsPhone}}" id="newPhone"> 
     <input type="text" style="display: none;" value="{{contactsPhone}}" name="phone">
     <input type="submit" value="Изменить">
 </form>
